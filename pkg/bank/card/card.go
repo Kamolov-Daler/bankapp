@@ -2,6 +2,7 @@ package card
 
 import (
 	"bank/pkg/bank/types"
+	"fmt"
 )
 
 func IssueCard(currency types.Currency, color string, name string) (card types.Card) {
@@ -83,10 +84,11 @@ func Total(cards []types.Card) types.Money {
 func PaymentSources(cards []types.Card) []types.PaymentSources {
 	arrPayments := []types.PaymentSources{}
 
-	for _, card := range cards {
+	for idx, card := range cards {
 		if card.Balance > 0 {
 			if card.Active {
-				arrPayments = append(arrPayments, types.PaymentSources{Type: "card", Number: "5058 xxxx xxxx 8888", Balance: card.Balance})
+				newIdx := "0" + fmt.Sprint(idx+1)
+				arrPayments = append(arrPayments, types.PaymentSources{Type: "card", Number: newIdx, Balance: card.Balance})
 			}
 		}
 	}
