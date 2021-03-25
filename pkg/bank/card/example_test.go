@@ -161,3 +161,30 @@ func ExampleTotal() {
 	// 0
 	// 0
 }
+
+func ExamplePaymentSources() {
+	cards := []types.Card{
+		{
+			Balance: 1_000_00,
+			Active:  true,
+		},
+		{
+			Balance: 1_000_00,
+			Active:  false,
+		},
+		{
+			Balance: 3_000_00,
+			Active:  true,
+		},
+	}
+
+	payments := PaymentSources(cards)
+
+	for _, payment := range payments {
+		fmt.Println(payment.Number)
+	}
+
+	// Output:
+	// 5058 xxxx xxxx 8888
+	// 5058 xxxx xxxx 8888
+}
